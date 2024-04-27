@@ -4,51 +4,23 @@ schema:
 dataSources:
   - kind: ethereum
     name: ERC20
-    network: mainnet
+    network: kakarot-sepolia
     source:
-      address: "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+
       abi: ERC20
-      startBlock: 4634748
+      startBlock: 1000
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Issue
-        - Redeem
-        - Deprecate
-        - Params
-        - DestroyedBlackFunds
-        - AddedBlackList
-        - RemovedBlackList
-        - Approval
         - Transfer
-        - Pause
-        - Unpause
+    
       abis:
         - name: ERC20
           file: ./abis/ERC20.json
       eventHandlers:
-        - event: Issue(uint256)
-          handler: handleIssue
-        - event: Redeem(uint256)
-          handler: handleRedeem
-        - event: Deprecate(address)
-          handler: handleDeprecate
-        - event: Params(uint256,uint256)
-          handler: handleParams
-        - event: DestroyedBlackFunds(address,uint256)
-          handler: handleDestroyedBlackFunds
-        - event: AddedBlackList(address)
-          handler: handleAddedBlackList
-        - event: RemovedBlackList(address)
-          handler: handleRemovedBlackList
-        - event: Approval(indexed address,indexed address,uint256)
-          handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256)
           handler: handleTransfer
-        - event: Pause()
-          handler: handlePause
-        - event: Unpause()
-          handler: handleUnpause
+
       file: ./src/erc-20.ts
